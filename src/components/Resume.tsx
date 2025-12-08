@@ -204,7 +204,7 @@ const Resume = () => {
                   <h3 className="text-lg font-bold mb-2 text-primary">Frontend Development</h3>
                   <p className="text-sm text-muted-foreground mb-6">UI/UX & Web Technologies</p>
                   <div className="space-y-4">
-                    {skills.ml.map((skill, index) => (
+                    {skills.frontend.map((skill, index) => (
                       <motion.div
                         key={skill.name}
                         initial={{ opacity: 0, x: -20 }}
