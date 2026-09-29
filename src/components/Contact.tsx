@@ -1,26 +1,11 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Linkedin, Github, CheckCircle } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
+import { Mail, Phone, MapPin, Linkedin, Github } from "lucide-react";
+import ContactForm from "@/components/ContactForm";
 
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      toast({
-        title: "Message Sent!",
-        description: "Thank you for reaching out. I'll get back to you soon.",
-      });
-    }, 1500);
-  };
 
   return (
     <section id="contact" className="section-padding relative" ref={ref}>
@@ -105,6 +90,7 @@ const Contact = () => {
                     href="https://www.linkedin.com/in/sundara-pandi-557a87295"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="LinkedIn"
                     className="w-10 h-10 bg-secondary hover:bg-primary/20 rounded-lg flex items-center justify-center transition-colors"
                     whileHover={{ scale: 1.1, y: -2 }}
                   >
@@ -114,6 +100,7 @@ const Contact = () => {
                     href="https://github.com/Sundarapandi531"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="GitHub"
                     className="w-10 h-10 bg-secondary hover:bg-primary/20 rounded-lg flex items-center justify-center transition-colors"
                     whileHover={{ scale: 1.1, y: -2 }}
                   >
@@ -131,78 +118,9 @@ const Contact = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="lg:col-span-3"
           >
-            <form onSubmit={handleSubmit} className="glass-card p-8">
-              <div className="grid md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Your Name</label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 bg-secondary border border-border rounded-xl focus:outline-none focus:border-primary/50 transition-colors"
-                    placeholder="Eg : John"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Phone Number</label>
-                  <input
-                    type="tel"
-                    required
-                    className="w-full px-4 py-3 bg-secondary border border-border rounded-xl focus:outline-none focus:border-primary/50 transition-colors"
-                    placeholder="+91 9876543210"
-                  />
-                </div>
-              </div>
-
-              <div className="mb-6">
-                <label className="block text-sm font-medium mb-2">Email Address</label>
-                <input
-                  type="email"
-                  required
-                  className="w-full px-4 py-3 bg-secondary border border-border rounded-xl focus:outline-none focus:border-primary/50 transition-colors"
-                  placeholder="Eg : john@example.com"
-                />
-              </div>
-
-              <div className="mb-6">
-                <label className="block text-sm font-medium mb-2">Subject</label>
-                <input
-                  type="text"
-                  required
-                  className="w-full px-4 py-3 bg-secondary border border-border rounded-xl focus:outline-none focus:border-primary/50 transition-colors"
-                  placeholder="Project Inquiry"
-                />
-              </div>
-
-              <div className="mb-6">
-                <label className="block text-sm font-medium mb-2">Your Message</label>
-                <textarea
-                  required
-                  rows={5}
-                  className="w-full px-4 py-3 bg-secondary border border-border rounded-xl focus:outline-none focus:border-primary/50 transition-colors resize-none"
-                  placeholder="Tell me about your project..."
-                />
-              </div>
-
-              <motion.button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-4 bg-gradient-primary text-primary-foreground rounded-xl font-semibold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    Send Message
-                    <Send size={18} />
-                  </>
-                )}
-              </motion.button>
-            </form>
+            <div className="glass-card p-8 h-full">
+              <ContactForm />
+            </div>
           </motion.div>
         </div>
 
